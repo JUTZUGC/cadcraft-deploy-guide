@@ -1,0 +1,110 @@
+{
+  "owner": "JUTZUGC",
+  "code": "JUTZUGC",
+  "project": {
+    "key": "cadcraft",
+    "nameCn": "CADCraft",
+    "repoName": "cadcraft-deploy-guide",
+    "oneLiner": "命令行、对象捕捉、图层、标注、填充、块和 DXF 都在，原生跑桌面，也能在浏览器里用",
+    "officialRepo": "https://github.com/storytold/cadcraft",
+    "officialDocs": "https://github.com/storytold/cadcraft#readme",
+    "stars": "7.3k",
+    "license": "Apache-2.0",
+    "highlights": [
+      "纯 Rust 原生：大图打开与缩放都跟手",
+      "操作习惯不变：命令行、捕捉、图层照旧",
+      "标准 DXF：进出自如，能和别人交换图纸",
+      "标注齐全：尺寸、多行文字、表格、引线",
+      "三平台安装包 + 浏览器版",
+      "Apache-2.0，可商用可二开"
+    ],
+    "mcpSupport": "项目本身不含 MCP；本仓库的 MCP 只提供安装步骤、示例文件与常见问题。",
+    "webuiUrl": "",
+    "adapterPorts": "",
+    "collectedAt": "2026-11-01",
+    "verification": [
+      [
+        "README 确认 early development 状态、DXF 能力与三平台安装包",
+        "已核对 2026-11-01"
+      ],
+      [
+        "Release v0.15.1 的 SHA256SUMS.txt 已下载核对（Windows 与 Linux）",
+        "已核对 2026-11-01"
+      ],
+      [
+        "未实测安装与制图",
+        "说明 2026-11-01"
+      ],
+      [
+        "MCP 冒烟：initialize / tools/list 返回 get_guide、search_guide、get_project_info",
+        "已验证 2026-11-01"
+      ],
+      [
+        "非目标宿主调用 get_guide 被拦截（HOST_NOT_ALLOWED）",
+        "已验证 2026-11-01"
+      ]
+    ],
+    "deploy": {
+      "type": "binary",
+      "steps": [
+        "curl -fL -o cadcraft.AppImage https://github.com/storytold/cadcraft/releases/download/v0.15.1/cadcraft-0.15.1-linux-x86_64.AppImage",
+        "echo \"88ae616958413b8fa56259df6f70fb695ab90b472e4c63cf955ae6a6471bb11d  cadcraft.AppImage\" | sha256sum -c -",
+        "chmod +x cadcraft.AppImage",
+        "echo \"安装完成：运行 ./cadcraft.AppImage，打开 examples 里的示例 DXF 试标注与图层\""
+      ],
+      "stepsPs": [
+        "curl.exe -fL -o cadcraft.msi https://github.com/storytold/cadcraft/releases/download/v0.15.1/cadcraft-0.15.1-windows-x64.msi",
+        "$h=(Get-FileHash .\\cadcraft.msi -Algorithm SHA256).Hash.ToLower()",
+        "if ($h -ne \"8788212a7e9f662360773676690f869ef890797d8b50446b76cc60053779e87c\") { throw \"SHA256 校验失败\" }",
+        "Start-Process msiexec.exe -ArgumentList '/i', \"$PWD\\cadcraft.msi\" -Wait",
+        "Write-Host \"安装完成：从开始菜单打开 CADCraft，先载入示例 DXF\""
+      ],
+      "source": "https://github.com/storytold/cadcraft/releases/latest"
+    },
+    "pitfalls": [
+      "Windows 安装被 SmartScreen 拦：核对 SHA256 后仍报，选仍要运行",
+      "macOS 提示无法验证：在隐私与安全性里允许",
+      "AppImage 打不开：先 chmod +x，缺 FUSE 用 --appimage-extract",
+      "打开别人图纸乱版：块与真彩色兼容有限，先导出简化版",
+      "中文显示成方框：把字体文件装进系统，或改用通用字体",
+      "3D 视图卡顿：降低渲染质量或改用 2D 视图",
+      "保存后打不开：确认对方 CAD 支持该 DXF 版本"
+    ]
+  },
+  "gate": {
+    "allow": [
+      "dumate"
+    ],
+    "label": "百度搭子",
+    "url": "https://www.dumate.cn/",
+    "guideUrl": "https://github.com/JUTZUGC/cadcraft-deploy-guide",
+    "howToFix": [
+      "1. 打开 https://www.dumate.cn/ ，下载并安装「百度搭子」电脑端（Windows / macOS）",
+      "2. 用账号登录",
+      "3. 在对话窗口发送：你好，帮我从 github 部署 JUTZUGC/cadcraft-deploy-guide 到我的电脑上",
+      "4. 部署完成后，在同一对话窗口里继续使用"
+    ],
+    "hint": "请改用「百度搭子」部署后再使用；本工具没有网页版入口。",
+    "onError": "allow"
+  },
+  "keywords": [
+    "CADCraft",
+    "CADCraft 安装",
+    "开源 CAD",
+    "DXF 编辑器 开源",
+    "Rust CAD 软件",
+    "cadcraft 教程",
+    "2D 制图 工具",
+    "3D CAD 免费",
+    "cadcraft deploy guide",
+    "替代 AutoCAD"
+  ],
+  "topics": [
+    "cad",
+    "dxf",
+    "rust",
+    "3d-modeling",
+    "engineering",
+    "cadcraft"
+  ]
+}
